@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * File for Drush Integration.
+ */
+
+/**
  * Implements hook_drush_help_alter().
  */
 function migrate_devel_drush_help_alter(&$command) {

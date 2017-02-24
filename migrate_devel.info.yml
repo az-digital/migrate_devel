@@ -4,6 +4,6 @@ package: Migrate
 type: module
 core: 8.x
 dependencies:
-  - devel
-  - migrate
-  - kint
+  - drupal:devel
+  - drupal:migrate
+  - drupal:kint

@@ -8,11 +8,12 @@ use Drupal\migrate\Event\MigratePreRowSaveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- *  MigrationEventSubscriber for Debugging Migrations
+ * MigrationEventSubscriber for Debugging Migrations.
  */
 class MigrationEventSubscriber implements EventSubscriberInterface {
   /**
-   * Pre Row Save Function
+   * Pre Row Save Function for --migrate-debug-pre.
+   *
    * @param \Drupal\migrate\Event\MigratePreRowSaveEvent $event
    */
   public function debugRowPreSave(MigratePreRowSaveEvent $event) {
@@ -22,13 +23,16 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
       $Source = $row->getSource();
       $Destination = $row->getDestination();
 
+      // We use kint directly here since we want to support variable naming and CLI colors.
       kint_require();
+      // Starting with capital letter for variables since this is actually a label.
       \Kint::dump($Source, $Destination);
     }
   }
 
   /**
-   * Post Row Save Function
+   * Post Row Save Function for --migrate-debug.
+   *
    * @param \Drupal\migrate\Event\MigratePostRowSaveEvent $event
    */
   public function debugRowPostSave(MigratePostRowSaveEvent $event) {
@@ -39,7 +43,9 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
       $Destination = $row->getDestination();
       $DestinationIDValues = $event->getDestinationIdValues();
 
+      // We use kint directly here since we want to support variable naming and CLI colors.
       kint_require();
+      // Starting with capital letter for variables since this is actually a label.
       \Kint::dump($Source, $Destination, $DestinationIDValues);
     }
   }
@@ -52,4 +58,5 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
     $events[MigrateEvents::POST_ROW_SAVE][] = ['debugRowPostSave'];
     return $events;
   }
+
 }

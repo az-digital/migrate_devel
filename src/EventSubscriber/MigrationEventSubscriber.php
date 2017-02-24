@@ -39,7 +39,7 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
    * Post Row Save Function for --migrate-debug.
    *
    * @param \Drupal\migrate\Event\MigratePostRowSaveEvent $event
-   *    Post-Row-Save Migrate Event.
+   *   Post-Row-Save Migrate Event.
    */
   public function debugRowPostSave(MigratePostRowSaveEvent $event) {
     $row = $event->getRow();

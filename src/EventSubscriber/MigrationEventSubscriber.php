@@ -1,10 +1,5 @@
 <?php
-/**
- * MigrationEventSubscriber for Debugging Migrations.
- *
- * @category Class
- * @package  migrate_devel
- */
+
 namespace Drupal\migrate_devel\EventSubscriber;
 
 use Drupal\migrate\Event\MigrateEvents;
@@ -14,6 +9,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * MigrationEventSubscriber for Debugging Migrations.
+ *
+ * @class MigrationEventSubscriber
  */
 class MigrationEventSubscriber implements EventSubscriberInterface {
 
@@ -27,11 +24,11 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
 
     $using_drush = function_exists('drush_get_option');
     if ($using_drush && drush_get_option('migrate-debug-pre')) {
-      // Starting with capital letter for variables since this is actually a label.
+      // Start with capital letter for variables since this is actually a label.
       $Source = $row->getSource();
       $Destination = $row->getDestination();
 
-      // We use kint directly here since we want to support variable naming and CLI colors.
+      // We use kint directly here since we want to support variable naming.
       kint_require();
       \Kint::dump($Source, $Destination);
     }
@@ -47,11 +44,12 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
 
     $using_drush = function_exists('drush_get_option');
     if ($using_drush && drush_get_option('migrate-debug')) {
-      // We use kint directly here since we want to support variable naming and CLI colors.
+      // Start with capital letter for variables since this is actually a label.
       $Source = $row->getSource();
       $Destination = $row->getDestination();
       $DestinationIDValues = $event->getDestinationIdValues();
 
+      // We use kint directly here since we want to support variable naming.
       kint_require();
       \Kint::dump($Source, $Destination, $DestinationIDValues);
     }

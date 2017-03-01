@@ -14,4 +14,10 @@ cli coloring and named variable debugging.
 Options are:
 
 * `--migrate-debug` - Prints out rows as they run. 
+Can be used in `migrate-import` or `migrate-status` and will revert 
+existing migrations to the default and clear the cache for them. 
+This requires [config_update](https://www.drupal.org/project/config_update) 
+if you use [migrate_plus](https://www.drupal.org/project/migrate_plus) 
+because migrations go into config.
 * `--migrate-debug-pre` - Same as above before the process is run on the row.
+Can be used in `migrate-import`.

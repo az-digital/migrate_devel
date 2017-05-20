@@ -42,16 +42,23 @@ function migrate_devel_drush_command_alter(&$command) {
  * Clears cache for migrations and reverts config of migrations if needed.
  */
 function migrate_devel_rebuild_migrations() {
+  // @TODO: Remove this legacy support of migrate_plus.
+  // After #2752335, it uses the default Migrate Plugin Manager
   /* @var $discovery CachedDiscoveryInterface */
-  if (\Drupal::moduleHandler()->moduleExists('migrate_plus')) {
+  if (\Drupal::hasService('plugin.manager.config_entity_migration')) {
     $discovery = \Drupal::service('plugin.manager.config_entity_migration');
-    migrate_devel_revert_migrate_config();
   } else {
     $discovery = \Drupal::service('plugin.manager.migration');
   }
 
   // Reset cached migrations
   $discovery->clearCachedDefinitions();
+
+  /* @var $discovery CachedDiscoveryInterface */
+  if (\Drupal::moduleHandler()->moduleExists('migrate_plus')) {
+    migrate_devel_revert_migrate_config();
+  }
+
   drush_log(dt('Reset Cached Migrations'), LogLevel::DEBUG);
 }
 

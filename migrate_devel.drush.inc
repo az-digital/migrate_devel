@@ -8,19 +8,18 @@ use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
 use Drupal\config_update\ConfigListInterface;
 use Drupal\config_update\ConfigRevertInterface;
 use Drupal\Core\Config\StorageInterface;
-use Drupal\migrate_plus\Plugin\Discovery\ConfigEntityDiscovery;
 use Drush\Log\LogLevel;
 
 /**
  * Implements hook_drush_help_alter().
  */
 function migrate_devel_drush_help_alter(&$command) {
-  if ($command['command'] == 'migrate-import') {
+  if ($command['command'] === 'migrate-import') {
     $command['options']['migrate-debug'] = 'Enable Debug Mode';
     $command['options']['migrate-debug-pre'] = 'Enable Debug Mode (Before Row Save)';
   }
 
-  if ($command['command'] == 'migrate-status') {
+  if ($command['command'] === 'migrate-status') {
     $command['options']['migrate-debug'] = 'Enable Debug Mode';
   }
 }
@@ -30,7 +29,7 @@ function migrate_devel_drush_help_alter(&$command) {
  */
 function migrate_devel_drush_command_alter(&$command) {
   $cmd = $command['command'];
-  if ($cmd == 'migrate-import' || $cmd == 'migrate-status') {
+  if ($cmd === 'migrate-import' || $cmd === 'migrate-status') {
     // Reset all migrations
     if (drush_get_option('migrate-debug')) {
       migrate_devel_rebuild_migrations();
@@ -56,7 +55,7 @@ function migrate_devel_rebuild_migrations() {
 
   /* @var $discovery CachedDiscoveryInterface */
   if (\Drupal::moduleHandler()->moduleExists('migrate_plus')) {
-    migrate_devel_revert_migrate_config();
+    migrate_devel_revert_migrate_config($discovery);
   }
 
   drush_log(dt('Reset Cached Migrations'), LogLevel::DEBUG);
@@ -64,15 +63,16 @@ function migrate_devel_rebuild_migrations() {
 
 /**
  * Reverts migrate config for migrate_plus
+ *
+ * @param CachedDiscoveryInterface $discovery
  */
-function migrate_devel_revert_migrate_config() {
+function migrate_devel_revert_migrate_config($discovery) {
   // If migrate_plus and config_update exists, revert the config.
   if (\Drupal::moduleHandler()->moduleExists('config_update')) {
     /* @var $config_revert ConfigRevertInterface */
     $config_revert = \Drupal::service('config_update.config_update');
 
-    $migration_discovery = new ConfigEntityDiscovery('migration');
-    foreach ($migration_discovery->getDefinitions() as $definition) {
+    foreach ($discovery->getDefinitions() as $definition) {
       $config_revert->revert('migration', $definition['id']);
     }
 

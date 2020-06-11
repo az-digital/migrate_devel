@@ -5,5 +5,12 @@
     "homepage": "https://www.drupal.org/project/migrate_devel",
     "support": {
         "issues": "https://www.drupal.org/project/issues/migrate_devel"
+    },
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^9"
+            }
+        }
     }
 }

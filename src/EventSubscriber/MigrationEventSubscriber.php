@@ -21,10 +21,13 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
    *    Pre-Row-Save Migrate Event.
    */
   public function debugRowPreSave(MigratePreRowSaveEvent $event) {
+    if (PHP_SAPI !== 'cli') {
+      return;
+    }
+
     $row = $event->getRow();
 
-    $using_drush = function_exists('drush_get_option');
-    if ($using_drush && drush_get_option('migrate-debug-pre')) {
+    if (in_array('migrate-debug-pre', \Drush\Drush::config()->get('runtime.options'))) {
       // Start with capital letter for variables since this is actually a label.
       $Source = $row->getSource();
       $Destination = $row->getDestination();
@@ -42,10 +45,14 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
    *   Post-Row-Save Migrate Event.
    */
   public function debugRowPostSave(MigratePostRowSaveEvent $event) {
+    if (PHP_SAPI !== 'cli') {
+      return;
+    }
+
     $row = $event->getRow();
 
-    $using_drush = function_exists('drush_get_option');
-    if ($using_drush && drush_get_option('migrate-debug')) {
+    if (in_array('migrate-debug', \Drush\Drush::config()->get('runtime.options'))) {
+
       // Start with capital letter for variables since this is actually a label.
       $Source = $row->getSource();
       $Destination = $row->getDestination();

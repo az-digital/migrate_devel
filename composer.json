@@ -1,5 +1,5 @@
 {
-    "name": "migrate_devel",
+    "name": "drupal/migrate_devel",
     "type": "drupal-module",
     "description": "Migrate Development Tools",
     "homepage": "https://www.drupal.org/project/migrate_devel",

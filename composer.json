@@ -6,6 +6,9 @@
     "support": {
         "issues": "https://www.drupal.org/project/issues/migrate_devel"
     },
+    "conflict": {
+      "drush/drush": "<9"
+    },
     "extra": {
         "drush": {
             "services": {

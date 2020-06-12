@@ -32,9 +32,19 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
       $Source = $row->getSource();
       $Destination = $row->getDestination();
 
-      // We use kint directly here since we want to support variable naming.
-      kint_require();
-      \Kint::dump($Source, $Destination);
+      // Uses Symfony VarDumper.
+      // @todo Explore advanced usage of CLI dumper class for nicer output.
+      // https://www.drupal.org/project/migrate_devel/issues/3151276
+      dump(
+        '---------------------------------------------------------------------',
+        '|                             $Source                               |',
+        '---------------------------------------------------------------------',
+        $Source,
+        '---------------------------------------------------------------------',
+        '|                           $Destination                            |',
+        '---------------------------------------------------------------------',
+        $Destination,
+      );
     }
   }
 
@@ -58,9 +68,23 @@ class MigrationEventSubscriber implements EventSubscriberInterface {
       $Destination = $row->getDestination();
       $DestinationIDValues = $event->getDestinationIdValues();
 
-      // We use kint directly here since we want to support variable naming.
-      kint_require();
-      \Kint::dump($Source, $Destination, $DestinationIDValues);
+      // Uses Symfony VarDumper.
+      // @todo Explore advanced usage of CLI dumper class for nicer output.
+      // https://www.drupal.org/project/migrate_devel/issues/3151276
+      dump(
+        '---------------------------------------------------------------------',
+        '|                             $Source                               |',
+        '---------------------------------------------------------------------',
+        $Source,
+        '---------------------------------------------------------------------',
+        '|                           $Destination                            |',
+        '---------------------------------------------------------------------',
+        $Destination,
+        '---------------------------------------------------------------------',
+        '|                       $DestinationIdValues                        |',
+        '---------------------------------------------------------------------',
+        $DestinationIDValues,
+      );
     }
   }
 

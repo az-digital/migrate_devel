@@ -49,10 +49,6 @@ INSTALLATION
 CONFIGURATION
 -------------
 
-Currently uses Kint (from devel) directly to print out debug information 
-instead of devel in order to take advantage of 
-cli coloring and named variable debugging.
-
 Options are:
 
 * `--migrate-debug` - Prints out rows as they run.

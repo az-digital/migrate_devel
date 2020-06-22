@@ -22,14 +22,6 @@ migrations.
    https://drupal.org/project/issues/migrate_devel
 
 
-REQUIREMENTS
-------------
-
-This module requires the modules outside of Drupal core:
-
- * [devel](https://www.drupal.org/project/devel)
-
-
 RECOMMENDED MODULES
 -------------------
 

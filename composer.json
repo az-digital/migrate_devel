@@ -1,10 +1,16 @@
 {
-    "name": "drupal/migrate_devel",
+    "name": "az-digital/migrate_devel",
     "type": "drupal-module",
-    "description": "Migrate Development Tools",
-    "homepage": "https://www.drupal.org/project/migrate_devel",
+    "description": "Fork of Drupal Migrate Devel module with D10 support",
+    "homepage": "https://github.com/az-digital/migrate_devel",
     "support": {
-        "issues": "https://www.drupal.org/project/issues/migrate_devel"
+        "issues": "https://github.com/az-digital/migrate_devel/issues"
+    },
+    "require": {
+        "drupal/core": "^8 || ^9 || ^10"
+    },
+    "replace": {
+        "drupal/migrate_devel": "*"
     },
     "conflict": {
       "drush/drush": "<9"

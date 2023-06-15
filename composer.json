@@ -3,6 +3,7 @@
     "type": "drupal-module",
     "description": "Fork of Drupal Migrate Devel module with D10 support",
     "homepage": "https://github.com/az-digital/migrate_devel",
+    "license": "GPL-2.0-or-later",
     "support": {
         "issues": "https://github.com/az-digital/migrate_devel/issues"
     },
